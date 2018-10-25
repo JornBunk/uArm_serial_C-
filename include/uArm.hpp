@@ -15,7 +15,7 @@ Serial conn;
 bool verbose;
 const int response_size = 1024; // same size as Serial uses.
 char response[1024]; // 1024 == response_size -> in macro?
-char command_number = 0; // to be used in communication with the uARM. command_number++ -> to get a new unique (enough) number
+unsigned char command_number = 0; // to be used in communication with the uARM. command_number++ -> to get a new unique (enough) number
 
 /**
  * @brief waits till there comes a message that the command is done ("OK")

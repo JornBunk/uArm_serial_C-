@@ -32,7 +32,7 @@ void waitDone(int command_number);
 void performCommand(const std::string & command);
 
 public:
-	uArm(const char * com, const bool & verbose = true):
+	uArm(const char * com, const bool & verbose = true, int mode = 0):
 		conn(com), verbose(verbose)
 	{
 		if(verbose){
@@ -41,6 +41,7 @@ public:
 				std::cout << response << "\n";
 			}
 		}
+		setMode(mode);
 	}
 	
 	/**
@@ -99,6 +100,21 @@ public:
      * @param speed (0 ~200)
      */
 	void moveMotor(int motor, int angle, int speed);
+	
+	/**
+     * @brief sets the mode of the uArm 
+     *
+	 * 0: Standard Suction Mode
+	 * 1: Laser Mode
+	 * 2: 3D printing Mode
+	 * 3: Universal Holder Mode
+	 * 4: Pro Suction Mode
+	 * 5: Plus Suction Mode
+	 * 6: Touch Pen Mode
+	 * 
+     * @param mode (0 ~ 6)
+     */
+	void setMode(int mode);
 	
 };
 

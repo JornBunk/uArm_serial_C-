@@ -30,6 +30,10 @@ void uArm::moveMotor(int motor, int angle, int speed){
 	performCommand("G2202 N" + std::to_string(motor) + " V" + std::to_string(angle) + " F" + std::to_string(speed) + "\n");
 }
 
+void uArm::setMode(int mode){
+	performCommand("M2400 S" + std::to_string(mode) + "\n");
+}
+
 //private:
 void uArm::waitDone(int command_number){
 	conn.clearReadBuffer();

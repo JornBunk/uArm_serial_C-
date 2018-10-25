@@ -1,5 +1,8 @@
-Debug/main.cpp.o: main.cpp uArm.hpp serial.hpp
+Debug/main.cpp.o: main.cpp ..\include/uArm.hpp ..\include/serial.hpp \
+ ..\include/serial.hpp
 
-uArm.hpp:
+..\include/uArm.hpp:
 
-serial.hpp:
+..\include/serial.hpp:
+
+..\include/serial.hpp:

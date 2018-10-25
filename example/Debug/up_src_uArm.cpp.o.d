@@ -1,3 +1,6 @@
-Debug/up_src_uArm.cpp.o: ../src/uArm.cpp uArm.hpp
+Debug/up_src_uArm.cpp.o: ../src/uArm.cpp ..\include/uArm.hpp \
+ ..\include/serial.hpp
 
-uArm.hpp:
+..\include/uArm.hpp:
+
+..\include/serial.hpp:

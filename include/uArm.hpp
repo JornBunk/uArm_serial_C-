@@ -81,6 +81,7 @@ public:
      *
 	 * The speed parameters seems to have no effect.
 	 * When an illegal position is given the arm will stop moving.
+	 * Note that you have to connect the uArm wrist seperately. Default it is screwed to the suction cup.
 	 * 
      * @param angle (0 ~180)
      * @param speed (0 ~200)
@@ -92,6 +93,7 @@ public:
      *
 	 * The speed parameters seems to have no effect on motor 3.
 	 * When an illegal position is given the arm will stop moving.
+	 * Note that you have to connect the uArm wrist (motor 3) seperately. Default it is screwed to the suction cup.
 	 * 
      * @param angle (0 ~ 180)
      * @param speed (0 ~200)

@@ -49,12 +49,16 @@ public:
      *
 	 * When an illegal position is given the arm will stop moving.
 	 * 
+	 * G0 = fast movement
+	 * G1 = straight line movement
+	 * 
      * @param x
 	 * @param y
 	 * @param z
      * @param speed (0 ~200)
+	 * @param G (0 or 1)(default = 0)
      */
-	void move(int x, int y, int z, int speed);
+	void move(int x, int y, int z, int speed, int G=0);
 	
 	/**
      * @brief moves the arm to the rest position.

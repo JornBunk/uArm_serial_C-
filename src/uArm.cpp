@@ -1,7 +1,7 @@
 #include "uArm.hpp"
 
-void uArm::move(int x, int y, int z, int speed){
-		std::string command = 	"G0 X" + std::to_string(x) + " Y" + std::to_string(y) + 
+void uArm::move(int x, int y, int z, int speed, int G){
+		std::string command = 	"G" + std::to_string(G) + " X" + std::to_string(x) + " Y" + std::to_string(y) + 
 												" Z" + std::to_string(z) + " F" + std::to_string(speed) +  "\n";
 		performCommand(command);
 }
@@ -9,8 +9,8 @@ void uArm::move(int x, int y, int z, int speed){
 void uArm::move2rest(){
 	turnPumpOFF();
 	moveWrist(90, 5);
-	move(200, 0, 50, 10);
-	move(101, 0, 40, 10);
+	move(200, 0, 50, 10, 0);
+	move(101, 0, 40, 10, 0);
 	conn.writeData("M2019\n", 7); // detach motors
 }
 

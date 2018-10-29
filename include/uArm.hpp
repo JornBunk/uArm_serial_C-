@@ -32,6 +32,13 @@ void waitDone(int command_number);
 void performCommand(const std::string & command);
 
 public:
+	/**
+	 * @brief Constructor
+	 * 
+	 * @param com the com-port the uArm is connected to
+	 * @param verbose when true the functions of uArm will be verbose (they will print more on the screen) (default = true)
+	 * @param mode set the mode of uArm. See for the differences modes the documentation of the uArm Swift Pro.
+	 */
 	uArm(const char * com, const bool & verbose = true, int mode = 0):
 		conn(com), verbose(verbose)
 	{

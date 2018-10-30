@@ -1,9 +1,9 @@
 #include "uArm.hpp"
 
-void uArm::move(int x, int y, int z, int speed, int G){
+void uArm::move(float x, float y, float z, int speed, int G, bool limitSwitch){
 		std::string command = 	"G" + std::to_string(G) + " X" + std::to_string(x) + " Y" + std::to_string(y) + 
 												" Z" + std::to_string(z) + " F" + std::to_string(speed) +  "\n";
-		performCommand(command);
+		performCommand(command, limitSwitch);
 }
 
 void uArm::move2rest(){
@@ -34,19 +34,29 @@ void uArm::setMode(int mode){
 	performCommand("M2400 S" + std::to_string(mode) + "\n");
 }
 
+bool uArm::getLimitSwitch(){
+	performCommand("P2233\n");
+	return strstr(response, "V1");
+}
+
 //private:
-void uArm::waitDone(int command_number){
+void uArm::waitDone(int command_number, bool limitSwitch){
 	conn.clearReadBuffer();
 	conn.readData(response, response_size);
 	while(!strstr(response, (std::to_string(command_number) + " ok").c_str())){
+		if(limitSwitch && strstr(response, "@6")){
+			break;
+		}
+		Sleep(200);
 		conn.readData(response, response_size);
 	}
 	if(verbose){
 		std::cout << response << "\n";
 	}
+	conn.clearReadBuffer();
 }
 
-void uArm::performCommand(const std::string & command){
+void uArm::performCommand(const std::string & command, bool limitSwitch){
 		command_number++;
 		std::string command_with_n = "#" + std::to_string(command_number) + " " + command;
 		
@@ -55,5 +65,5 @@ void uArm::performCommand(const std::string & command){
 		if(verbose){
 			std::cout << command_with_n;
 		}
-		waitDone(command_number);
+		waitDone(command_number, limitSwitch);
 }

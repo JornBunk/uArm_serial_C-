@@ -21,17 +21,23 @@ unsigned char command_number = 0; // to be used in communication with the uARM. 
  * @brief waits till there comes a message that the command is done ("OK")
  *
  * @param command_number
+ * @Param bool LimitSwitch when set on the true the command is seen as done when the limit switch is triggered.
  */
-void waitDone(int command_number);
+void waitDone(int command_number, bool limitSwitch = false);
 
 /**
  * @brief sends the command to the uArm and waits till its done.
  *
  * @param command_number
+ * @Param bool LimitSwitch when set on the true the command is seen as done when the limit switch is triggered.
  */
-void performCommand(const std::string & command);
+void performCommand(const std::string & command, bool limitSwitch=false);
+
 
 public:
+
+
+
 	/**
 	 * @brief Constructor
 	 * 
@@ -45,7 +51,6 @@ public:
 		if(verbose){
 			for(int i =0; i<5; i++){
 				conn.readData(response, response_size);
-				std::cout << response << "\n";
 			}
 		}
 		setMode(mode);
@@ -64,8 +69,9 @@ public:
 	 * @param z
      * @param speed (0 ~200)
 	 * @param G (0 or 1)(default = 0)
+	 * @Param bool LimitSwitch when set on the true the movement stops when the limit switch is triggered.
      */
-	void move(int x, int y, int z, int speed, int G=0);
+	void move(float x, float y, float z, int speed, int G=0, bool limitSwitch=false);
 	
 	/**
      * @brief moves the arm to the rest position.
@@ -126,6 +132,12 @@ public:
      * @param mode (0 ~ 6)
      */
 	void setMode(int mode);
+	
+	/**
+	 * @brief  Get the status of the limit Switch
+	 * @return bool
+	 */
+	bool getLimitSwitch();
 	
 };
 

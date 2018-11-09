@@ -39,8 +39,13 @@ bool uArm::getLimitSwitch(){
 	return strstr(response, "V1");
 }
 
+float uArm::getAngle(int joint){
+	// TODO: op forum vragen of #n P2206 N0\n het wel doet op firmware 4.
+	return 0;
+}
+
 //private:
-void uArm::waitDone(int command_number, bool limitSwitch){
+void uArm::waitDone(uint8_t command_number, bool limitSwitch){
 	conn.clearReadBuffer();
 	conn.readData(response, response_size);
 	while(!strstr(response, (std::to_string(command_number) + " ok").c_str())){

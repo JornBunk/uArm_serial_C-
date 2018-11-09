@@ -15,7 +15,7 @@ Serial conn;
 bool verbose;
 const int response_size = 1024; // same size as Serial uses.
 char response[1024]; // 1024 == response_size -> in macro?
-unsigned char command_number = 0; // to be used in communication with the uARM. command_number++ -> to get a new unique (enough) number
+uint8_t command_number = 0; // to be used in communication with the uARM. command_number++ -> to get a new unique (enough) number
 
 /**
  * @brief waits till there comes a message that the command is done ("OK")
@@ -23,7 +23,7 @@ unsigned char command_number = 0; // to be used in communication with the uARM. 
  * @param command_number
  * @Param bool LimitSwitch when set on the true the command is seen as done when the limit switch is triggered.
  */
-void waitDone(int command_number, bool limitSwitch = false);
+void waitDone(uint8_t command_number, bool limitSwitch = false);
 
 /**
  * @brief sends the command to the uArm and waits till its done.
@@ -139,6 +139,12 @@ public:
 	 */
 	bool getLimitSwitch();
 	
+	/**
+	 * @brief  returns the angle of a joint
+	 * @param joint int (0~3)
+	 * @return angle float
+	 */
+	float getAngle(int joint);
 };
 
 #endif // UARM_HPP
